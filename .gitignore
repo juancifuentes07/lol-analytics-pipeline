@@ -1,0 +1,104 @@
+
+# ==========================================
+# PYTHON
+# ==========================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================================
+# ENTORNOS VIRTUALES
+# ==========================================
+
+venv/
+.venv/
+env/
+ENV/
+
+# ==========================================
+# JUPYTER NOTEBOOKS
+# ==========================================
+
+.ipynb_checkpoints/
+
+# ==========================================
+# VARIABLES DE ENTORNO Y CREDENCIALES
+# ==========================================
+
+.env
+.env.*
+!.env.example
+
+# Credentials
+credentials.json
+secrets.json
+*.pem
+*.key
+
+# ==========================================
+# DATOS
+# ==========================================
+
+# Archivos de datos originales
+data/raw/
+
+# Archivos intermedios
+data/interim/
+
+# Datos procesados (depende del proyecto)
+data/processed/
+
+# Archivos grandes
+*.csv
+*.parquet
+*.xlsx
+*.xls
+*.jsonl
+
+# ==========================================
+# LOGS
+# ==========================================
+
+*.log
+logs/
+
+# ==========================================
+# ARCHIVOS TEMPORALES
+# ==========================================
+
+*.tmp
+*.temp
+*.bak
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# IDE Y EDITORES
+# ==========================================
+
+.vscode/
+.idea/
+
+# ==========================================
+# TESTING Y COVERAGE
+# ==========================================
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==========================================
+# DISTRIBUCIÓN
+# ==========================================
+
+build/
+dist/
+*.egg-info/
+
+# ==========================================
+# CONFIGURACIONES LOCALES
+# ==========================================
+
+*.local
