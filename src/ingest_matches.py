@@ -16,12 +16,14 @@ def get_match_detail(match_id, max_retries=3):
     url = f"{BASE_URL}/lol/match/v5/matches/{match_id}"
     headers = {"X-Riot-Token": API_KEY}
 
-    for _ in range(max_retries):
+    for attempt in range(max_retries):
         try:
             response = requests.get(url, headers=headers, timeout=(5, 15))
         except requests.exceptions.RequestException as e:
-            print(f"Error de red en {match_id}: {e}")
-            return None
+            wait = 2 ** (attempt + 1)
+            print(f"Error de red en {match_id} (intento {attempt + 1}): {e}. Reintentando en {wait}s...")
+            time.sleep(wait)
+            continue
 
         if response.status_code == 200:
             return response.json()
@@ -39,11 +41,21 @@ def get_match_detail(match_id, max_retries=3):
 
 
 def main():
+    def get_all_match_ids(puuid, total=100, page_size=100):
+    #Pide IDs por páginas hasta juntar `total` o hasta que Riot no tenga más.
+        ids = []
+        while len(ids) < total:
+            page = get_match_ids(puuid, count=min(page_size, total - len(ids)), start=len(ids))
+            if not page:
+                break
+            ids.extend(page)
+        return ids
+
     if not API_KEY or not PUUID:
         sys.exit("Faltan RIOT_API_KEY o PUUID en el .env")
 
     RAW_DIR.mkdir(parents=True, exist_ok=True)
-    match_ids = get_match_ids(PUUID, count=20)
+    match_ids = get_all_match_ids(PUUID, total=100)
     print(f"{len(match_ids)} partidas por revisar")
 
     for match_id in match_ids:
