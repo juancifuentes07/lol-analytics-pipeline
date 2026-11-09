@@ -102,3 +102,10 @@ dist/
 # ==========================================
 
 *.local
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+.user.yml
