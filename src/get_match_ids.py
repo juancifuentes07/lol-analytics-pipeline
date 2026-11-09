@@ -11,11 +11,13 @@ PUUID = os.getenv("PUUID")
 BASE_URL = "https://americas.api.riotgames.com"
 
 
-def get_match_ids(puuid, count=20):
+def get_match_ids(puuid, count=20, start=0, queue=None):
     """Devuelve la lista de IDs de las últimas `count` partidas del jugador."""
     url = f"{BASE_URL}/lol/match/v5/matches/by-puuid/{puuid}/ids"
     headers = {"X-Riot-Token": API_KEY}
     params = {"count": count}
+    if queue is not None:
+        params["queue"] = queue
 
     try:
         response = requests.get(url, headers=headers, params=params, timeout=(5, 15))
