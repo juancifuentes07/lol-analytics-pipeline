@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: fct_my_matches
+    columns:
+      - name: match_id
+        data_tests:
+          - not_null
+          - unique
+  - name: mart_champion_stats
+    columns:
+      - name: champion_name
+        data_tests:
+          - not_null
+          - unique
+
+  - name: mart_role_stats
+    columns:
+      - name: team_position
+        data_tests:
+          - not_null
+          - unique
+  - name: mart_monthly_stats
+    columns:
+      - name: game_month
+        data_tests:
+          - not_null
+          - unique
