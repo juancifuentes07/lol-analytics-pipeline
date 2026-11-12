@@ -39,9 +39,7 @@ def get_match_detail(match_id, max_retries=3):
 
     return None
 
-
-def main():
-    def get_all_match_ids(puuid, total=100, page_size=100):
+def get_all_match_ids(puuid, total=300, page_size=100):
     #Pide IDs por páginas hasta juntar `total` o hasta que Riot no tenga más.
         ids = []
         while len(ids) < total:
@@ -51,11 +49,12 @@ def main():
             ids.extend(page)
         return ids
 
+def main():
     if not API_KEY or not PUUID:
         sys.exit("Faltan RIOT_API_KEY o PUUID en el .env")
 
     RAW_DIR.mkdir(parents=True, exist_ok=True)
-    match_ids = get_all_match_ids(PUUID, total=100)
+    match_ids = get_all_match_ids(PUUID, total=300)
     print(f"{len(match_ids)} partidas por revisar")
 
     for match_id in match_ids:
@@ -72,7 +71,6 @@ def main():
         path.write_text(json.dumps(detail, ensure_ascii=False), encoding="utf-8")
         print(f"{match_id}: guardada")
         time.sleep(PAUSE_SECONDS)
-
 
 if __name__ == "__main__":
     main()
